@@ -1,28 +1,27 @@
 import React, { useState,useEffect} from "react";
 import { MDBCard, MDBCardBody, MDBValidation,MDBBtn,MDBInput} from "mdb-react-ui-kit";
 //import Chip from '@material-ui/core/chip';
-import FileBase from "react-file-base64";
+//import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
-import { createFood } from "../../redux/features/foodSlice.js"; 
+import {createHello} from "../../redux/features/RequestSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import "./AddFood.css"
 //import { yellow } from "@mui/material/colors";
+import "./Request.css";
 
 
 const initialState = {
   title: "",
   quantity: "",
   Address:"",
-  tags: [],
 };
-const AddEditFood = () => {
-  const [foodData, setFoodData] = useState(initialState);
-  const { error } = useSelector((state) => ({ ...state.food}));
+const RequestFood = () => {
+  const [helloData, setHelloData] = useState(initialState);
+  const { error } = useSelector((state) => ({ ...state.hello}));
  //const { user } = useSelector((state) => ({ ...state.auth }));
    const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { title,quantity,Address } = foodData;
+  const { title,quantity,Address } = helloData;
 
   useEffect(()=>{
     error&& toast.error(error); 
@@ -31,8 +30,8 @@ const AddEditFood = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (title && quantity && Address) {
-      const updatedFoodData = { ...foodData };
-        dispatch(createFood({ updatedFoodData, navigate, toast }));     
+      const updatedHelloData = { ...helloData };
+        dispatch(createHello({ updatedHelloData, navigate, toast }));     
         
         handleClear();
     }
@@ -40,29 +39,28 @@ const AddEditFood = () => {
   };
   const onInputChange = (e) => {
     const { name, value } = e.target;
-    setFoodData({ ...foodData, [name]: value });
+    setHelloData({ ...helloData, [name]: value });
   };
   
   const handleClear = () => {
-    setFoodData({ title: "", quantity: "", Address:"" });  
+    setHelloData({ title: "", quantity: "", Address:"" });  
   };
   return (
     <div className="back">
-    <div
+    <div 
       style={{
         margin: "auto",
         padding: "15px",
         maxWidth: "450px",
-        alignContent: "center",
-       
-        
+        alignContent: "center",       
       }}
       className="container">
       <MDBCard alignment="center">
-        <h5>Add Food</h5>
+        <h5 className="name">Request Food</h5>
         <MDBCardBody>
           <MDBValidation onSubmit={handleSubmit} className="row g-3" noValidate>
             <div className="col-md-12">
+            <span className="type">name(restorent,hotel,etc)</span>
               <MDBInput
                 placeholder="Enter Name"
                 type="text"
@@ -76,8 +74,8 @@ const AddEditFood = () => {
               />
             </div>
             <div className="col-md-12">
-              <MDBInput
-              
+            <span className="quality">Quantity</span>
+              <MDBInput              
                 placeholder="Enter quantity"
                 type="text"
                 value={quantity}
@@ -91,6 +89,7 @@ const AddEditFood = () => {
             </div>
             
             <div className="cal-md-23">
+              <span className="quality1">Address</span>
               <MDBInput
                 placeholder="Enter Address"
                 type="text"
@@ -103,14 +102,6 @@ const AddEditFood = () => {
                 validation="Please provide Address"
               />
               </div>
-            
-            <div className="d-flex justify-content-start">
-              <FileBase
-                type="file"
-                multiple={false}
-                onDone={({ base64 }) =>
-                  setFoodData({ ...foodData, imageFile: base64 })}/>
-            </div>
             <div className="col-12">
               <MDBBtn style={{ width: "100%" }}>
                 Submit
@@ -132,4 +123,4 @@ const AddEditFood = () => {
   );
 };
 
-export default AddEditFood;
+export default RequestFood;

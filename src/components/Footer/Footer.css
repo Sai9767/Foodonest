@@ -1,7 +1,7 @@
 .footer {
     display: flex;
     flex-direction: column;
-    margin-top: 380px;
+    
     font-weight: bold;
     
   }
@@ -68,7 +68,7 @@
   
   
   .black{
-    background-color: aqua;
+    background-color: rgb(27, 27, 26);
   }
   
   .footer-name {
