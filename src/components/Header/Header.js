@@ -20,9 +20,11 @@ export default function Header() {
       </div>
       </Link>
 
+      <Link to="RequestFood" style={{ textDecoration: "none" }}>
       <div className="header_option">
         <span className="header_optionLineOne">RequestFood</span>
       </div>
+      </Link>
 
       <div className="header_option">
         <span className="header_optionLineOne">Donate </span>
